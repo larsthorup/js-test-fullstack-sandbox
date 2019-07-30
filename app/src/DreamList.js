@@ -9,6 +9,7 @@ class DreamList extends Component {
     const response = await fetch('/api/dreams');
     const dreamList = await response.json();
     this.setState({dreamList});
+    if (this.props.loading) this.props.loading.resolve();
   }
 
   render() {

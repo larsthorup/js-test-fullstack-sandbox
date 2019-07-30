@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Lars Thorup <lars@zealake.com> (https://www.zealake.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@pollyjs/adapter-node-http": "^2.6.0",
+    "@pollyjs/core": "^2.6.0",
+    "@pollyjs/persister-fs": "^2.6.0"
+  }
+}
