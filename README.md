@@ -8,14 +8,15 @@ This project is a working example of adding fast full integration tests to a ful
 
     # test database
     # configure a PostgreSQL instance, e.g. on elephantsql.com
-    # create server/.env.test from .env-sample and set DATABASE 
+    # create server/.env.test from .env-sample and set DATABASE
 
     # node.js dependencies
     cd app
     npm install
     cd ../server
     npm install
-
+    cd ../test
+    npm install
 
 ## database
 
