@@ -10,8 +10,8 @@
   "author": "Lars Thorup <lars@zealake.com> (https://www.zealake.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@pollyjs/adapter-node-http": "^4.0.3",
-    "@pollyjs/core": "^4.0.2",
-    "@pollyjs/persister-fs": "^4.0.2"
+    "@pollyjs/adapter-node-http": "^4.0.4",
+    "@pollyjs/core": "^4.0.4",
+    "@pollyjs/persister-fs": "^4.0.4"
   }
 }
