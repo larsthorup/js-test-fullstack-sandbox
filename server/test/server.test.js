@@ -1,36 +1,37 @@
-require('dotenv').config({path: '.env.test'});
 const { expect } = require('chai');
 require('isomorphic-fetch');
 const { describe, it } = require('mocha');
 
 const { recordHttp } = require('../../test/setupPolly');
 
+const env = require('../src/env.test.json');
 const { connect, disconnect } = require('./db');
-const { starting, stopping } = require('./server');
+const { starting, stopping } = require('./netlify');
 const { resetting } = require('./setupTestData');
 
-const dbConnectionString = process.env.DATABASE;
+const dbConnectionString = env.DATABASE;
 const port = 3011;
 
 describe('server', function () {
-  let db, server;
+  let db, netlifyProcess;
   let polly;
 
   before(async function () {
+    this.timeout(15000);
     db = connect(dbConnectionString);
     await resetting({db});
-    server = await starting({db, port});
+    netlifyProcess = await starting({port})
     polly = recordHttp('dream');
   });
 
   after(async function () {
     if (polly) await polly.stop();
-    if (server) await stopping({server});
-    disconnect();
+    if (netlifyProcess) await stopping({netlifyProcess});
+    disconnect()
   });
 
   it('should fetch all dreams', async function () {
-    const response = await fetch(`http://localhost:${port}/api/dreams`);
+    const response = await fetch(`http://localhost:${port}/.netlify/functions/dreams`);
     expect(response.status).to.equal(200);
     const dreamList = await response.json();
     expect(dreamList).to.deep.equal([
