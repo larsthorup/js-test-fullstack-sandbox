@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 const kill = require('tree-kill');
 
 async function starting({port}) {
-  netlifyProcess = spawn(`netlify dev --port ${port} --targetPort ${port - 1}`, {
+  netlifyProcess = spawn(`netlify dev --port ${port}`, {
     env: {
       ...process.env,
       NODE_ENV: 'test'
