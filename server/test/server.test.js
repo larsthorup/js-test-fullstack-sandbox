@@ -1,11 +1,11 @@
 const { expect } = require('chai');
 require('isomorphic-fetch');
 const { describe, it } = require('mocha');
+const pgp = require('pg-promise')();
 
 const { recordHttp } = require('../../test/setupPolly');
 
 const env = require('../src/env.test.json');
-const { connect, disconnect } = require('./db');
 const { starting, stopping } = require('./netlify');
 const { resetting } = require('./setupTestData');
 
@@ -18,16 +18,16 @@ describe('server', function () {
 
   before(async function () {
     this.timeout(15000);
-    db = connect(dbConnectionString);
+    db = pgp(dbConnectionString);
     await resetting({db});
-    netlifyProcess = await starting({port})
+    netlifyProcess = await starting({port});
     polly = recordHttp('dream');
   });
 
   after(async function () {
     if (polly) await polly.stop();
     if (netlifyProcess) await stopping({netlifyProcess});
-    disconnect()
+    pgp.end();
   });
 
   it('should fetch all dreams', async function () {

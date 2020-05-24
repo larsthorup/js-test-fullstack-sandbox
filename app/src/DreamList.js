@@ -9,7 +9,6 @@ class DreamList extends Component {
     const response = await fetch('/.netlify/functions/dreams');
     const dreamList = await response.json();
     this.setState({dreamList});
-    if (this.props.loading) this.props.loading.resolve();
   }
 
   render() {

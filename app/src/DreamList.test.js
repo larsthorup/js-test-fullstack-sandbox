@@ -1,9 +1,8 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import {render, screen} from '@testing-library/react';
 
 import {stubHttp} from '../../test/setupPolly';
 
-import {resolvable} from "./resolvable";
 import DreamList from './DreamList';
 
 
@@ -20,11 +19,10 @@ describe('DreamList', function () {
 
   describe('render', function () {
     it('should render data', async () => {
-      const loading = resolvable();
-      const w = mount(<DreamList loading={loading}/>);
-      await loading;
-      w.update();      expect(w.find('h3').text()).toEqual('All my dreams');
-      expect(w.find('ul > li').map(e => e.text())).toEqual([
+      render(<DreamList />);
+      expect(await screen.findByText('All my dreams')).toBeInTheDocument();
+      const dreamElements = await screen.findAllByRole('listitem');
+      expect(dreamElements.map(el => el.textContent)).toEqual([
         'Learn French',
         'Visit Albania'
       ]);

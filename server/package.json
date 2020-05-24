@@ -3,7 +3,8 @@
   "version": "1.0.1",
   "description": "",
   "scripts": {
-    "test": "mocha --recursive test/**/*.test.js"
+    "start": "netlify dev",
+    "test": "mocha --recursive test/**/*.test.js --watch"
   },
   "author": "Lars Thorup <lars@zealake.com> (http://github.com/larsthorup)",
   "license": "MIT",
